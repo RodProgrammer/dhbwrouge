@@ -34,6 +34,7 @@ public class GameCanvas extends Canvas implements Runnable {
     private final MapRenderer mapRenderer;
 
     private final ResourceManager resourceManager;
+    private final LightRenderer lightRenderer;
 
     public GameCanvas(ResourceManager resourceManager) {
         running = true;
@@ -50,6 +51,8 @@ public class GameCanvas extends Canvas implements Runnable {
         addKeyListener(listener);
 
         mapRenderer = new MapRenderer(resourceManager);
+        lightRenderer = new LightRenderer(mapRenderer.getMap());
+
     }
 
     public void startThread() {
@@ -133,6 +136,10 @@ public class GameCanvas extends Canvas implements Runnable {
             }
         }
 
+        player.draw(g);
+
+        lightRenderer.renderLight(g, player.getX(), player.getY());
+
         g.setColor(Color.GREEN);
         g.fillRect(20, 48, Settings.SCALED_TILE_SIZE, 16);
         g.setColor(Color.BLUE);
@@ -141,10 +148,6 @@ public class GameCanvas extends Canvas implements Runnable {
         g.setColor(Color.WHITE);
         g.drawString("FPS: " + fps, 20, 20);
         g.drawString("TPS: " + tps, 20, 40);
-
-        player.draw(g);
-
-        //test.draw(g);
 
         chat.renderChat(g);
 

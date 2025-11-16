@@ -52,19 +52,19 @@ public class Player extends Entity implements Serializable {
     @Override
     public void tick() {
         if (dirs.contains(Direction.UP)) {
-            this.y -= 5;
+            this.y -= speed;
             currDirectionImage = Direction.UP.value;
         }
         if (dirs.contains(Direction.DOWN)) {
-            this.y += 5;
+            this.y += speed;
             currDirectionImage = Direction.DOWN.value;
         }
         if (dirs.contains(Direction.LEFT)) {
-            this.x -= 5;
+            this.x -= speed;
             currDirectionImage = Direction.LEFT.value;
         }
         if (dirs.contains(Direction.RIGHT)) {
-            this.x += 5;
+            this.x += speed;
             currDirectionImage = Direction.RIGHT.value;
         }
         if (dirs.contains(Direction.UP) && dirs.contains(Direction.DOWN) || dirs.contains(Direction.LEFT) && dirs.contains(Direction.RIGHT)) {

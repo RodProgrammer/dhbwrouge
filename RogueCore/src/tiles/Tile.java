@@ -10,6 +10,7 @@ public abstract class Tile {
     protected final Rectangle rect;
 
     protected transient BufferedImage image;
+    protected transient Light light;
 
     protected int x;
     protected int y;
@@ -24,11 +25,15 @@ public abstract class Tile {
         this.x = x;
         this.y = y;
 
+        light = null;
+
         image = new BufferedImage(rect.width, rect.height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = image.createGraphics();
         g2d.setColor(Color.MAGENTA);
         g2d.drawRect(x, y, rect.width, rect.height);
     }
+
+    public abstract void draw(Graphics2D g, int x, int y);
 
     public abstract void tick();
 
@@ -36,8 +41,8 @@ public abstract class Tile {
         return rect;
     }
 
-    public BufferedImage getImage() {
-        return image;
+    public Light getLight() {
+        return light;
     }
 
 }

@@ -71,7 +71,7 @@ public class Chat {
 
     public void deleteLetter() {
         if (!characterStack.isEmpty()) {
-            char g = characterStack.pop();
+            characterStack.pop();
         }
     }
 

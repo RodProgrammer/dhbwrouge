@@ -16,6 +16,11 @@ public class CaveGround extends Tile {
     }
 
     @Override
+    public void draw(Graphics2D g, int x, int y) {
+        g.drawImage(image, x, y, null);
+    }
+
+    @Override
     public void tick() {
 
     }

@@ -17,6 +17,8 @@ public abstract class Entity implements Serializable {
     protected int mana;
     protected int maxMana;
 
+    protected int speed;
+
     protected String name;
 
     protected transient ResourceManager resourceManager;
@@ -35,6 +37,7 @@ public abstract class Entity implements Serializable {
         this.maxMana = maxMana;
         this.health = maxHealth;
         this.mana = maxMana;
+        this.speed = 5;
 
         this.resourceManager = resourceManager;
     }

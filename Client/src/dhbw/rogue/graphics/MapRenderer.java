@@ -2,6 +2,7 @@ package dhbw.rogue.graphics;
 
 import spritemanager.ResourceManager;
 import tiles.CaveGround;
+import tiles.TestLightTile;
 import tiles.Tile;
 import utility.Settings;
 
@@ -23,6 +24,7 @@ public class MapRenderer {
                 map[i][j] = new CaveGround(i*Settings.SCALED_TILE_SIZE, j*Settings.SCALED_TILE_SIZE, resourceManager);
             }
         }
+        map[0][0] = new TestLightTile(0, 0);
     }
 
     public void render(Graphics2D g, int discrepancyX, int discrepancyY) {
@@ -31,7 +33,7 @@ public class MapRenderer {
                 int x = (i * Settings.SCALED_TILE_SIZE) + (Settings.SCREEN_WIDTH / 2) - discrepancyX;
                 int y = (j * Settings.SCALED_TILE_SIZE) + (Settings.SCREEN_HEIGHT / 2) - discrepancyY;
                 if (!(x >= Settings.SCREEN_WIDTH || x <= -1 * Settings.SCALED_TILE_SIZE) && !(y >= Settings.SCREEN_HEIGHT || y <= -1 * Settings.SCALED_TILE_SIZE)) {
-                    g.drawImage(map[i][j].getImage(), x, y, null);
+                    map[i][j].draw(g, x, y);
                 }
             }
         }
@@ -39,7 +41,16 @@ public class MapRenderer {
     }
 
     public void tick() {
-
+        for (Tile[] tiles : map) {
+            for (Tile tile : tiles) {
+                tile.tick();
+            }
+        }
     }
+
+    public Tile[][] getMap() {
+        return map;
+    }
+
 
 }
