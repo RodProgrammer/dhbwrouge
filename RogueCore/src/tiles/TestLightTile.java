@@ -3,12 +3,13 @@ package tiles;
 import utility.Settings;
 
 import java.awt.*;
+import java.util.Random;
 
 public class TestLightTile extends Tile {
     public TestLightTile(int x, int y) {
         super(x, y);
 
-        light = new Light(x, y, 10, 10);
+        light = new Light(x, y, Settings.SCALED_TILE_SIZE * 2, new Random().nextInt(10, 101));
     }
 
     @Override

@@ -12,6 +12,6 @@ public class Settings {
 
     public static final int TPS = 60;
 
-    public static final int LIGHT_STEP = 4;
+    public static final int LIGHT_STEP = 5;
 
 }

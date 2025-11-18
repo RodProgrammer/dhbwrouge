@@ -24,17 +24,20 @@ public class Light {
         drawLight();
     }
 
-    public void renderLight(Graphics g, int x, int y) {
-
+    public void render(Graphics2D g) {
+        System.out.println("X: " + x + " Y: " + y);
+        g.drawImage(light, x - radius + (Settings.SCALED_TILE_SIZE / 2), y - radius + (Settings.SCALED_TILE_SIZE / 2), null);
     }
 
     public void drawLight() {
         Graphics2D g = (Graphics2D) light.getGraphics();
+        g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        int iterations = radius / Settings.LIGHT_STEP;
         g.setColor(new Color(0, 0, 0, luminosity));
+        int iterations = radius / Settings.LIGHT_STEP;
         for (int i = 0; i < iterations; i++) {
-            g.fillOval(x + radius - (i*Settings.LIGHT_STEP), y + radius - (i*Settings.LIGHT_STEP), i * Settings.LIGHT_STEP * 2, i * Settings.LIGHT_STEP * 2);
+            g.fillOval(radius - (i * Settings.LIGHT_STEP), radius - (i * Settings.LIGHT_STEP), i * Settings.LIGHT_STEP * 2, i * Settings.LIGHT_STEP * 2);
         }
+        g.dispose();
     }
 }
