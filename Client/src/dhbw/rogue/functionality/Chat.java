@@ -61,8 +61,8 @@ public class Chat {
     }
 
     public void sendMessage() {
-        if(!characterStack.isEmpty() && !createMessage().trim().isEmpty()) {
-            gameCanvas.sendMessageToServer(new Message(createMessage()));
+        if (!characterStack.isEmpty() && !createMessage().trim().isEmpty()) {
+            gameCanvas.sendMessageToServer(new Message(createMessage(), null));
             characterStack.clear();
         } else {
             characterStack.clear();

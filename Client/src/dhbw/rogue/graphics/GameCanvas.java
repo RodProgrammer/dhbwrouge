@@ -155,24 +155,22 @@ public class GameCanvas extends Canvas implements Runnable {
         bs.show();
     }
 
-    public void addPlayer(Player player) {
+    public synchronized void addPlayer(Player player) {
+        if (this.player.getName().equals(player.getName())) {
+            this.player.updatePlayer(player);
+            return;
+        }
+
         synchronized (players) {
-            boolean found = false;
             for (Player p : players) {
                 if (p.getName().equals(player.getName())) {
-                    found = true;
-                    p.setX(player.getX());
-                    p.setY(player.getY());
-                    p.setCurrDirectionImage(player.getCurrDirectionImage());
-                    p.setCurrImage(player.getCurrImage());
-                    break;
+                    p.updatePlayer(player);
+                   return;
                 }
             }
-            if (!found) {
-                player.setResourceManager(resourceManager);
-                player.loadImages();
-                players.add(player);
-            }
+            player.setResourceManager(resourceManager);
+            player.loadImages();
+            players.add(player);
         }
     }
 
@@ -185,9 +183,9 @@ public class GameCanvas extends Canvas implements Runnable {
         }
     }
 
-    public void removePlayer(String playerName) {
+    public void removePlayer(Player player) {
         synchronized (players) {
-            players.removeIf(p -> p.getName().equals(playerName));
+            players.removeIf(p -> p.getName().equals(player.getName()));
         }
     }
 
@@ -228,6 +226,10 @@ public class GameCanvas extends Canvas implements Runnable {
 
     public void sendMessageToServer(Message message) {
         serverConnection.sendObject(message);
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
 

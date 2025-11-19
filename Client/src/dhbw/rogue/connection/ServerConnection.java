@@ -15,14 +15,11 @@ public class ServerConnection {
     private ObjectOutputStream out;
     private ObjectInputStream in;
     private final Socket socket;
-    private final Window gameWindow;
+    private final Window gameWindow;;
 
-    private final ResourceManager resourceManager;
-
-    public ServerConnection(Socket socket, Window gameWindow, ResourceManager resourceManager) {
+    public ServerConnection(Socket socket, Window gameWindow) {
         this.socket = socket;
         this.gameWindow = gameWindow;
-        this.resourceManager = resourceManager;
         try {
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
@@ -59,19 +56,13 @@ public class ServerConnection {
         }).start();
     }
 
-    private void receiveMessage(Object msg) {
+    private synchronized void receiveMessage(Object msg) {
         try {
             switch (msg) {
-                case String s -> {
-                    gameWindow.getGameCanvas().addInformationMessage(s);
-                    if (s.split(" ").length == 2 && s.split(" ")[0].equals("Disconnected:")) {
-                        gameWindow.getGameCanvas().removePlayer(s.split(" ")[1]);
-                    }
-                    System.out.println("[INFO] Message received: " + s);
-                }
-                case Player player -> gameWindow.getGameCanvas().addPlayer(player);
-                case Entity entity -> gameWindow.getGameCanvas().addEntity(entity);
-                case Message message -> gameWindow.getGameCanvas().addChatMessage(message);
+                case String s -> gameWindow.addInformationMessage(s);
+                case Player player -> gameWindow.update_player(player);
+                case Entity entity -> gameWindow.update_entity(entity);
+                case Message message -> gameWindow.addChatMessage(message);
                 default -> {}
             }
         } catch (ClassCastException e) {

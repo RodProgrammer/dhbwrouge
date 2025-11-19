@@ -88,6 +88,14 @@ public class Player extends Entity implements Serializable {
         }
     }
 
+    public void updatePlayer(Player player) {
+        this.x = player.x;
+        this.y = player.y;
+        this.currImage = player.currImage;
+        this.currDirectionImage = player.currDirectionImage;
+        this.speed = player.speed;
+    }
+
     public void addDirection(Direction dir) {
         dirs.add(dir);
     }

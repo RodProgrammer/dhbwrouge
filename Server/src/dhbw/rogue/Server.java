@@ -33,6 +33,7 @@ public class Server {
         System.out.println("Client " + clientConnection.getUsername() + " has disconnected.");
         for (ClientConnection connection : connections) {
             connection.sendInformation("Disconnected: " + clientConnection.getUsername());
+            connection.sendMessage(new Message("Disconnected Player", clientConnection.getLastPlayerState()));
         }
     }
 
