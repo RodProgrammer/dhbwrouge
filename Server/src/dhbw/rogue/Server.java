@@ -28,7 +28,7 @@ public class Server {
         //pingClients();
     }
 
-    public void removeClient(ClientConnection clientConnection) {
+    public synchronized void removeClient(ClientConnection clientConnection) {
         connections.remove(clientConnection);
         System.out.println("Client " + clientConnection.getUsername() + " has disconnected.");
         for (ClientConnection connection : connections) {
@@ -37,7 +37,7 @@ public class Server {
         }
     }
 
-    public void sendMessage(ClientConnection clientConnection , Message message) {
+    public synchronized void sendMessage(ClientConnection clientConnection , Message message) {
         synchronized (connections) {
             for (ClientConnection client : connections) {
                 client.sendMessage(new Message(message, clientConnection.getUsername()));
@@ -45,7 +45,7 @@ public class Server {
         }
     }
 
-    public void sendInformation(ClientConnection clientConnection, String information) {
+    public synchronized void sendInformation(ClientConnection clientConnection, String information) {
         for (ClientConnection client : connections) {
             if (client != clientConnection) {
                 client.sendInformation(information);
@@ -53,7 +53,7 @@ public class Server {
         }
     }
 
-    public void sendEntity(ClientConnection clientConnection, Entity entity) {
+    public synchronized void sendEntity(ClientConnection clientConnection, Entity entity) {
         synchronized (connections) {
             for (ClientConnection client : connections) {
                 if (client != clientConnection) {
@@ -63,11 +63,22 @@ public class Server {
         }
     }
 
-    public void sendPlayer(ClientConnection clientConnection, Player player) {
+    public synchronized void sendPlayer(ClientConnection clientConnection, Player player) {
         synchronized (connections) {
             for (ClientConnection client : connections) {
                 if (client != clientConnection) {
                     client.sendPlayer(player);
+                }
+            }
+        }
+    }
+
+    public synchronized void updatePlayer(ClientConnection clientConnection, Player player) {
+        synchronized (connections) {
+            for (ClientConnection client : connections) {
+                if (client == clientConnection) {
+                    client.sendPlayer(player);
+                    break;
                 }
             }
         }
