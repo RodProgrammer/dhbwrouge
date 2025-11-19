@@ -21,6 +21,10 @@ public class Utility {
         return scaledImage;
     }
 
+    /**
+     * We split the PNG into multiple BufferedImages, so we got a SpriteSheet ::)))
+     * also we basically load everything into RAM, so we go vroom vroom
+     */
     public static BufferedImage[][] getImages(BufferedImage originalImage, int width, int height) {
         int imageWidth = originalImage.getWidth() / width;
         int imageHeight = originalImage.getHeight() / height;
