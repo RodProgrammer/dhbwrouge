@@ -20,7 +20,6 @@ public class SpriteSheet {
         if (originalImage != null) {
             spritesheet = Utility.getImages(originalImage, 16,16);
         }
-
     }
 
     public BufferedImage[][] getTileset() {

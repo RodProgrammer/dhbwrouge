@@ -3,6 +3,7 @@ package dhbw.rogue;
 import data.Message;
 import entity.Entity;
 import entity.Player;
+import utility.Settings;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -135,6 +136,13 @@ public class Server {
         for (ClientConnection client : connections) {
             Player player = client.getLastPlayerState();
             if (player != null) {
+
+                if (player.getX() < 0 && player.getY() < 0) {
+                    player.setX(0);
+                    player.setY(0);
+                    updatePlayer(client, player);
+                }
+
                 if (player.getX() < 0) {
                     player.setX(0);
                     updatePlayer(client, player);

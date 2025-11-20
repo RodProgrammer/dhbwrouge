@@ -1,13 +1,12 @@
 package mapmanager.maps;
 
 import spritemanager.ResourceManager;
-import tiles.CaveGround;
 import tiles.Tile;
 
-public class Map {
+public abstract class Map {
 
-    private final Tile[][] map;
-    private transient ResourceManager resourceManager;
+    protected final Tile[][] map;
+    protected transient ResourceManager resourceManager;
 
     public Map(int width, int height, ResourceManager resourceManager) {
         this.resourceManager = resourceManager;
@@ -21,13 +20,7 @@ public class Map {
         return map;
     }
 
-    public void loadMap() {
-        for (int x = 0; x < map.length; x++) {
-            for (int y = 0; y < map[x].length; y++) {
-                map[x][y] = new CaveGround(x, y, resourceManager);
-            }
-        }
-    }
+    public abstract void loadMap();
 
     public void setResourceManager(ResourceManager resourceManager) {
         this.resourceManager = resourceManager;
