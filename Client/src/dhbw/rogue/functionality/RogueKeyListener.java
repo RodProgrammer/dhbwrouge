@@ -89,10 +89,6 @@ public class RogueKeyListener implements KeyListener {
         }
     }
 
-    public boolean isChatOpened() {
-        return chatOpened;
-    }
-
     @Override
     public void keyTyped(KeyEvent e) {}
 }

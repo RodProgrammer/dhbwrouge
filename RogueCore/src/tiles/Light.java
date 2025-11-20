@@ -25,7 +25,6 @@ public class Light {
     }
 
     public void render(Graphics2D g) {
-        System.out.println("X: " + x + " Y: " + y);
         g.drawImage(light, x - radius + (Settings.SCALED_TILE_SIZE / 2), y - radius + (Settings.SCALED_TILE_SIZE / 2), null);
     }
 

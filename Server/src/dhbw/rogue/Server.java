@@ -138,7 +138,7 @@ public class Server {
                 if (player.getX() < 0) {
                     player.setX(0);
                     updatePlayer(client, player);
-                } else if(player.getY() < 0) {
+                } else if (player.getY() < 0) {
                     player.setY(0);
                     updatePlayer(client, player);
                 }

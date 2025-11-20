@@ -175,7 +175,7 @@ public class GameCanvas extends Canvas implements Runnable {
     }
 
     public void addEntity(Entity entity) {
-        if(!entities.contains(entity)) {
+        if (!entities.contains(entity)) {
             entities.add(entity);
         } else {
             entities.remove(entity);
@@ -192,7 +192,7 @@ public class GameCanvas extends Canvas implements Runnable {
     private void deleteMessages() {
         new Thread(() -> {
             while(running) {
-                if(!informationMessages.isEmpty()) {
+                if (!informationMessages.isEmpty()) {
                     try {
                         Thread.sleep(1300);
                     } catch (InterruptedException ex) {
