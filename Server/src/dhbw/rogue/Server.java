@@ -17,6 +17,8 @@ public class Server {
 
     private final List<ClientConnection> connections;
 
+    private final List<Entity> monster; //for possible Monsters in the future
+
     public Server(int port) {
         try {
             serverSocket = new ServerSocket(port);
@@ -24,6 +26,8 @@ public class Server {
             System.out.println("[ERROR] Server couldn't create ServerSocket");
         }
         connections = Collections.synchronizedList(new ArrayList<>());
+        monster = Collections.synchronizedList(new ArrayList<>());
+
         System.out.println("[INFO] Server has been started.");
         //pingClients();
     }
@@ -109,21 +113,18 @@ public class Server {
 
             while (true) {
 
-                if (connections.isEmpty()) {
-                    continue;
-                }
+                if (connections.isEmpty()) continue;
 
                 long now = System.nanoTime();
                 delta += (now - lastTime) / ns;
                 lastTime = now;
                 if (delta >= 1) {
-                    tick(); //<- doable
+                    tick();
                     delta--;
                     tps++;
                 }
 
                 if (tps >= 60) {
-                    System.out.println("TPS: " + tps);
                     tps = 0;
                 }
             }
@@ -131,7 +132,18 @@ public class Server {
     }
 
     private void tick() {
-        //TODO: Maybe make collisions work?
+        for (ClientConnection client : connections) {
+            Player player = client.getLastPlayerState();
+            if (player != null) {
+                if (player.getX() < 0) {
+                    player.setX(0);
+                    updatePlayer(client, player);
+                } else if(player.getY() < 0) {
+                    player.setY(0);
+                    updatePlayer(client, player);
+                }
+            }
+        }
     }
 
     private void pingClients() {

@@ -15,6 +15,8 @@ public abstract class Tile {
     protected int x;
     protected int y;
 
+    protected boolean hasCollision;
+
     public Tile(int x, int y) {
         rect = new Rectangle(x,y, Settings.SCALED_TILE_SIZE, Settings.SCALED_TILE_SIZE);
         rect.x = x;
@@ -24,6 +26,7 @@ public abstract class Tile {
 
         this.x = x;
         this.y = y;
+        this.hasCollision = false;
 
         light = null;
 

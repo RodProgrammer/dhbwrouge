@@ -7,8 +7,6 @@ import tiles.Tile;
 import utility.Settings;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.util.Random;
 
 public class MapRenderer {
 
@@ -16,8 +14,6 @@ public class MapRenderer {
 
     public MapRenderer(ResourceManager resourceManager) {
         map = new Tile[32][32];
-
-        Random rand = new Random();
 
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {

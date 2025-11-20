@@ -227,10 +227,4 @@ public class GameCanvas extends Canvas implements Runnable {
     public void sendMessageToServer(Message message) {
         serverConnection.sendObject(message);
     }
-
-    public Player getPlayer() {
-        return player;
-    }
-
-
 }

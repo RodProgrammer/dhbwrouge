@@ -4,7 +4,6 @@ import data.Message;
 import dhbw.rogue.graphics.Window;
 import entity.Entity;
 import entity.Player;
-import spritemanager.ResourceManager;
 
 import javax.swing.*;
 import java.io.*;

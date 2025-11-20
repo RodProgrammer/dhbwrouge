@@ -5,7 +5,6 @@ import utility.Settings;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Set;
 
 public class LightRenderer {
 
@@ -31,11 +30,10 @@ public class LightRenderer {
         g.fillRect(0, 0, allTiles.length * Settings.SCALED_TILE_SIZE, allTiles[0].length * Settings.SCALED_TILE_SIZE);
 
         g.setComposite(AlphaComposite.DstOut);
-        for (int i = 0; i < allTiles.length; i++) {
-            for (int j = 0; j < allTiles[i].length; j++) {
-                if (allTiles[i][j].getLight() != null) {
-                    allTiles[i][j].getLight().render(g);
-
+        for (Tile[] allTile : allTiles) {
+            for (Tile tile : allTile) {
+                if (tile.getLight() != null) {
+                    tile.getLight().render(g);
                 }
             }
         }
