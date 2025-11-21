@@ -24,4 +24,8 @@ public class TestLightTile extends Tile {
     public void tick() {
 
     }
+
+    public void reloadLight() {
+        light = new Light(x, y, Settings.SCALED_TILE_SIZE * 2, new Random().nextInt(10, 101));
+    }
 }

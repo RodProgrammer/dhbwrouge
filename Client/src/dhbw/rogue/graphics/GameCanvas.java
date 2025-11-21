@@ -7,6 +7,7 @@ import dhbw.rogue.connection.ServerConnection;
 import entity.Dwarf;
 import entity.Entity;
 import entity.Player;
+import mapmanager.MapManager;
 import spritemanager.ResourceManager;
 import utility.Settings;
 
@@ -36,7 +37,7 @@ public class GameCanvas extends Canvas implements Runnable {
     private final ResourceManager resourceManager;
     private final LightRenderer lightRenderer;
 
-    public GameCanvas(ResourceManager resourceManager) {
+    public GameCanvas(ResourceManager resourceManager, MapManager mapManager) {
         running = true;
 
         informationMessages = Collections.synchronizedList(new ArrayList<>());
@@ -50,7 +51,7 @@ public class GameCanvas extends Canvas implements Runnable {
         listener = new RogueKeyListener(player, chat);
         addKeyListener(listener);
 
-        mapRenderer = new MapRenderer(resourceManager);
+        mapRenderer = new MapRenderer(resourceManager, mapManager);
         lightRenderer = new LightRenderer(mapRenderer.getMap());
 
     }
@@ -77,6 +78,7 @@ public class GameCanvas extends Canvas implements Runnable {
             while (unprocessed >= 1) {
                 ticks++;
                 player.tick();
+                mapRenderer.tick(); // maybe animations for maps?
 
                 synchronized (player) { //ConcurrentModificationException without it :)
                     if (serverConnection != null) {

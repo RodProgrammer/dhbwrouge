@@ -4,6 +4,7 @@ import data.Message;
 import dhbw.rogue.connection.ServerConnection;
 import entity.Entity;
 import entity.Player;
+import mapmanager.MapManager;
 import spritemanager.ResourceManager;
 
 import javax.swing.*;
@@ -13,8 +14,8 @@ public class Window extends JFrame {
 
     private final GameCanvas gameCanvas;
 
-    public Window(ResourceManager resourceManager) {
-        gameCanvas = new GameCanvas(resourceManager);
+    public Window(ResourceManager resourceManager, MapManager mapManager) {
+        gameCanvas = new GameCanvas(resourceManager, mapManager);
         setTitle("Clandestine Dungeons");
         setSize(1280, 720);
         setPreferredSize(new Dimension(1280, 720));

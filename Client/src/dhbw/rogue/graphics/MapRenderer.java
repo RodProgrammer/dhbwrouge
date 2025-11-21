@@ -1,8 +1,7 @@
 package dhbw.rogue.graphics;
 
+import mapmanager.MapManager;
 import spritemanager.ResourceManager;
-import tiles.CaveGround;
-import tiles.TestLightTile;
 import tiles.Tile;
 import utility.Settings;
 
@@ -10,22 +9,15 @@ import java.awt.*;
 
 public class MapRenderer {
 
-    private final Tile[][] map;
 
-    public MapRenderer(ResourceManager resourceManager) {
-        map = new Tile[32][32];
+    private ResourceManager resourceManager;
+    private MapManager mapManager;
+    private Tile[][] map;
 
-        for (int i = 0; i < map.length; i++) {
-            for (int j = 0; j < map[i].length; j++) {
-                if (i % 8 == 0 && j % 8 == 0) {
-                    map[i][j] = new TestLightTile(i*Settings.SCALED_TILE_SIZE, j*Settings.SCALED_TILE_SIZE);
-                    continue;
-                }
-                map[i][j] = new CaveGround(i*Settings.SCALED_TILE_SIZE, j*Settings.SCALED_TILE_SIZE, resourceManager);
-            }
-        }
-        map[0][0] = new TestLightTile(0, 0);
-
+    public MapRenderer(ResourceManager resourceManager, MapManager mapManager) {
+        this.mapManager = mapManager;
+        this.resourceManager = resourceManager;
+        map = mapManager.getMap("TestMap").getMap();
     }
 
     public void render(Graphics2D g, int discrepancyX, int discrepancyY) {
@@ -53,5 +45,10 @@ public class MapRenderer {
         return map;
     }
 
+    public void reloadMap(String mapName) {
+        var newMap = mapManager.getMap(mapName);
+        newMap.loadMap();
+
+    }
 
 }
