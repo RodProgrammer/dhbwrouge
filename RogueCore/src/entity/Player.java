@@ -1,5 +1,6 @@
 package entity;
 
+import effects.Effect;
 import spritemanager.ResourceManager;
 import utility.Settings;
 
@@ -35,22 +36,37 @@ public class Player extends Entity implements Serializable {
         g.setColor(Color.RED);
         g.drawString(name, x - discrepancyX + (Settings.SCREEN_WIDTH / 2) - (name.length() * 2), y - discrepancyY + (Settings.SCREEN_HEIGHT / 2) - 24);
 
+        for (Effect effect : effects) {
+            effect.render(g, x - discrepancyX + (Settings.SCREEN_WIDTH / 2), y - discrepancyY + (Settings.SCREEN_HEIGHT / 2));
+        }
+
         g.setColor(Color.GREEN);
         g.fillRect(x - discrepancyX + (Settings.SCREEN_WIDTH / 2), y - discrepancyY + (Settings.SCREEN_HEIGHT / 2) - 16, Settings.SCALED_TILE_SIZE, 8);
         g.setColor(Color.BLUE);
         g.fillRect(x - discrepancyX + (Settings.SCREEN_WIDTH / 2), y - discrepancyY + (Settings.SCREEN_HEIGHT / 2) - 8, Settings.SCALED_TILE_SIZE, 8);
+
     }
 
     @Override
     public void draw(Graphics2D g) {
         g.drawImage(images[currImage][currDirectionImage], Settings.SCREEN_WIDTH / 2, Settings.SCREEN_HEIGHT / 2, null);
 
+        for(Effect effect : effects) {
+            effect.render(g, Settings.SCREEN_WIDTH / 2, Settings.SCREEN_HEIGHT / 2);
+        }
+
         g.setColor(Color.RED);
         g.drawString(name, (Settings.SCREEN_WIDTH / 2) - (name.length() * 2), (Settings.SCREEN_HEIGHT / 2) - 8);
+
     }
 
     @Override
     public void tick() {
+
+        for (Effect effect : effects) {
+            effect.tick();
+        }
+
         if (dirs.contains(Direction.UP)) {
             this.y -= speed;
             currDirectionImage = Direction.UP.value;
@@ -94,6 +110,11 @@ public class Player extends Entity implements Serializable {
         this.currImage = player.currImage;
         this.currDirectionImage = player.currDirectionImage;
         this.speed = player.speed;
+        this.effects = player.effects;
+        for(Effect effect : effects) {
+            effect.setResourceManager(resourceManager);
+            effect.loadEffect();
+        }
     }
 
     public void addDirection(Direction dir) {

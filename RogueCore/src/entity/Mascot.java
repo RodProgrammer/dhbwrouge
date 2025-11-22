@@ -42,7 +42,7 @@ public class Mascot extends Entity {
         } catch (IOException ex) {}
 
         if (originalImage != null) {
-            images = Utility.getImages(originalImage, 32,32);
+            images = Utility.getImages(originalImage, 32,32, Settings.SCALED_TILE_SIZE);
             System.out.println("[INFO]: Loaded " + Arrays.deepToString(images));
             System.out.println("[INFO]: Length: " + images.length);
         }

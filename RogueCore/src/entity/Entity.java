@@ -1,10 +1,15 @@
 package entity;
 
+import effects.Effect;
 import spritemanager.ResourceManager;
 import utility.Settings;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Entity implements Serializable {
 
@@ -22,6 +27,7 @@ public abstract class Entity implements Serializable {
     protected String name;
 
     protected transient ResourceManager resourceManager;
+    protected List<Effect> effects;
 
     public Entity(int x, int y, int maxHealth, int maxMana, ResourceManager resourceManager) {
         this.x = x;
@@ -40,6 +46,8 @@ public abstract class Entity implements Serializable {
         this.speed = 5;
 
         this.resourceManager = resourceManager;
+
+        this.effects = new ArrayList<>();
     }
 
     public void draw(Graphics2D g) {
@@ -96,5 +104,9 @@ public abstract class Entity implements Serializable {
 
     public void setResourceManager(ResourceManager resourceManager) {
         this.resourceManager = resourceManager;
+    }
+
+    public List<Effect> getEffects() {
+        return effects;
     }
 }

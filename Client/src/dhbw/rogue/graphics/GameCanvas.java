@@ -4,6 +4,7 @@ import data.Message;
 import dhbw.rogue.functionality.Chat;
 import dhbw.rogue.functionality.RogueKeyListener;
 import dhbw.rogue.connection.ServerConnection;
+import effects.Effect;
 import entity.Dwarf;
 import entity.Entity;
 import entity.Player;
@@ -172,6 +173,10 @@ public class GameCanvas extends Canvas implements Runnable {
             }
             player.setResourceManager(resourceManager);
             player.loadImages();
+            for(Effect p : player.getEffects()) {
+                p.setResourceManager(resourceManager);
+                p.loadEffect();
+            }
             players.add(player);
         }
     }

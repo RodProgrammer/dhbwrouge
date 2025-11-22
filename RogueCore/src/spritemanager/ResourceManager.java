@@ -1,6 +1,7 @@
 package spritemanager;
 
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferDouble;
 import java.util.HashMap;
 
 public class ResourceManager {
@@ -28,6 +29,10 @@ public class ResourceManager {
 
         SpriteSheet cave = new SpriteSheet("resource/maps/cave/RA_Caverns.png");
         spritesheet.put("cave", cave);
+
+        SpriteSheet basicCircler = new SpriteSheet("resource/effects/circler/GandalfHardcore Circler Projectiles1.png", 100, 100);
+
+        spritesheet.put("basicCircler", basicCircler);
 
         //SpriteSheet elf = new SpriteSheet("resource/entities/elf/elf.png");
     }
