@@ -143,6 +143,10 @@ public class GameCanvas extends Canvas implements Runnable {
 
         lightRenderer.renderLight(g, player.getX(), player.getY());
 
+        for (Effect effect : player.getEffects()) {
+            g.drawImage(effect.getEffectIcon(), 48, Settings.SCREEN_HEIGHT-96, null);
+        }
+
         g.setColor(Color.GREEN);
         g.fillRect(20, 48, Settings.SCALED_TILE_SIZE, 16);
         g.setColor(Color.BLUE);

@@ -12,7 +12,9 @@ public abstract class Effect implements Serializable {
 
     protected transient ResourceManager resourceManager;
 
-    public Effect(int x, int y, ResourceManager resourceManager) {
+    protected transient BufferedImage effectIcon;
+
+    public Effect(ResourceManager resourceManager) {
         this.resourceManager = resourceManager;
     }
 
@@ -21,6 +23,10 @@ public abstract class Effect implements Serializable {
     public abstract void tick();
 
     public abstract void loadEffect();
+
+    public BufferedImage getEffectIcon() {
+        return effectIcon;
+    }
 
     public void setResourceManager(ResourceManager resourceManager) {
         this.resourceManager = resourceManager;

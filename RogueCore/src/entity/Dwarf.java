@@ -10,7 +10,7 @@ public class Dwarf extends Player implements Serializable {
     public Dwarf(int x, int y, ResourceManager resourceManager) {
         super(x, y, resourceManager);
 
-        effects.add(new CirclerBasic(x, y, resourceManager));
+        effects.add(new CirclerBasic(resourceManager));
 
         loadImages();
     }

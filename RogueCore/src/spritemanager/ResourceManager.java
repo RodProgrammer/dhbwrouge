@@ -34,6 +34,9 @@ public class ResourceManager {
 
         spritesheet.put("basicCircler", basicCircler);
 
+        SpriteSheet iconSheet = new SpriteSheet("resource/icons/Icons Sheet.png");
+        spritesheet.put("iconSheet", iconSheet);
+
         //SpriteSheet elf = new SpriteSheet("resource/entities/elf/elf.png");
     }
 }

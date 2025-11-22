@@ -8,6 +8,8 @@ public class Elf extends Player {
 
     public Elf(int x, int y, ResourceManager resourceManager) {
         super(x, y, resourceManager);
+
+        loadImages();
     }
 
     public void loadImages() {

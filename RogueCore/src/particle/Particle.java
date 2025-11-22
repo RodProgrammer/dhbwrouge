@@ -1,7 +1,3 @@
 package particle;
 
-public class Particle {
-
-
-
-}
+public class Particle { }
